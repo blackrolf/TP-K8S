@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: motd-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: motd-api
+  template:
+    metadata:
+      labels:
+        app: motd-api
+    spec:
+      containers:
+      - name: motd-api-container
+        image: blackrolf/motd-api:v1.1
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MESSAGE
+          value: "Votre Message du Jour"
+        - name: APP_PORT
+          value: "5000"
